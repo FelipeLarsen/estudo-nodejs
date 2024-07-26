@@ -1,0 +1,23 @@
+POST http://localhost:{port}/items
+content-type: application/json
+
+{
+  "title": "Digite..."
+}
+
+###
+
+GET http://localhost:{port}/items
+
+###
+
+PUT http://localhost:{port}/items/{id}
+content-type: application/json
+
+{
+  "title": "Digite..."
+}
+
+###
+
+DELETE http://localhost:{port}/items/{id}
