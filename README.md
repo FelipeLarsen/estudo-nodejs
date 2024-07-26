@@ -1,2 +1,2 @@
 # estudo-nodejs
-Repositório criado para estudo do Node.js
+Repositório criado para estudo do Node.js.
