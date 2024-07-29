@@ -1,23 +1,24 @@
-POST http://localhost:{port}/items
+POST http://localhost:{PORT}/items
 content-type: application/json
 
 {
-  "title": "Digite..."
+  "title": "item-01"
 }
 
 ###
 
-GET http://localhost:{port}/items
+# GET http://localhost:{PORT}/items?search={search term}
+GET http://localhost:{PORT}/items
 
 ###
 
-PUT http://localhost:{port}/items/{id}
+PUT http://localhost:{PORT}/items
 content-type: application/json
 
 {
-  "title": "Digite..."
+  "title": "item-01"
 }
 
 ###
 
-DELETE http://localhost:{port}/items/{id}
+DELETE http://localhost:{PORT}/items/{ID}

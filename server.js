@@ -7,17 +7,19 @@
 
 // Fastify
 import { fastify } from 'fastify'
-import { DatabaseMemory } from './database-memory.js'
+// import { DatabaseMemory } from './database-memory.js'
+import { DatabasePostgres } from './database-postgres.js'
 
 const server = fastify()
 
-const database = new DatabaseMemory()
+// const database = new DatabaseMemory()
+const database = new DatabasePostgres()
 
 // POST
-server.post('/items', (request, reply) => {
-  const { title } = request.body
+server.post('/items', async (request, reply) => {
+  const title = request.body
   
-  database.create({
+  await database.create({
     title
   })
   
@@ -25,21 +27,21 @@ server.post('/items', (request, reply) => {
 })
 
 // GET
-server.get('/items', (request) => {
+server.get('/items', async (request) => {
   const search = request.query.search
 
-  const items = database.list(search)
+  const items = await database.list(search)
   
   return items
 })
 
 // PUT
-server.put('/items/:id', (request, reply) => {
+server.put('/items/:id', async (request, reply) => {
   const itemId = request.params.id
 
-  const { title } = request.body
+  const title = request.body
 
-  database.update(itemId, {
+  await database.update(itemId, {
     title
   })
 
@@ -47,14 +49,14 @@ server.put('/items/:id', (request, reply) => {
 })
 
 // DELETE
-server.delete('/delete/:id', (request, reply) => {
+server.delete('/delete/:id', async (request, reply) => {
   const itemId = request.params.id
 
-  database.delete(itemId)
+  await database.delete(itemId)
 
   return reply.status(204).send()
 })
 
 server.listen({
-  port: { port },
+  port: process.env.PORT ?? {PORT}
 })
